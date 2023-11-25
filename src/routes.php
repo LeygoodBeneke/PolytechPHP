@@ -9,4 +9,10 @@
         '~^article/edit/(\d+)$~'=>[\src\Controllers\ArticleController::class, 'edit'],
         '~^article/update/(\d+)$~'=>[\src\Controllers\ArticleController::class, 'update'],
         '~^article/delete/(\d+)$~'=>[\src\Controllers\ArticleController::class, 'delete'],
+
+        '~^comment/create/(\d+)$~'=>[\src\Controllers\CommentController::class, 'create'],
+        '~^comment/edit/(\d+)$~'=>[\src\Controllers\CommentController::class, 'edit'],
+        '~^comment/update/(\d+)$~'=>[\src\Controllers\CommentController::class, 'update'],
+        '~^comment/store$~'=>[\src\Controllers\CommentController::class, 'store'],
+        '~^comment/delete/(\d+)$~'=>[\src\Controllers\CommentController::class, 'delete'],
     ]);

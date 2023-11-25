@@ -44,6 +44,13 @@ abstract class ActiveRecordEntity{
         $articles = $db->query($sql, [], static::class);
         return $articles;
     }
+    public static function findByArticleId($artid):array
+    {
+        $db = Db::getInstance();
+        $sql = 'SELECT * FROM `'.static::getTableName().'` WHERE `article_id`='.$artid;
+        $articles = $db->query($sql, [], static::class);
+        return $articles;
+    }
     public static function getById(int $id):static{
         $db = Db::getInstance();
         $sql = 'SELECT * FROM `'.static::getTableName().'` WHERE `id`=:id;';

@@ -3,6 +3,7 @@
 namespace src\Controllers;
 use src\View\View;
 use src\Models\Article\Article;
+use src\Models\Comment\Comment;
 use src\Models\User\User;
 
 class ArticleController{
@@ -19,13 +20,16 @@ class ArticleController{
 
     public function show($id){
         $article = Article::getById($id);
+
+        $comments = Comment::findByArticleId($id);
+
         $user = $article->getAuthorId();
 
         if (!$article){
             $this->view->renderHtml('main/error.php',[], 404);
             return;
         }
-        $this->view->renderHtml('articles/show.php', ['article'=>$article, 'user'=>$user]);
+        $this->view->renderHtml('articles/show.php', ['article'=>$article, 'user'=>$user, 'comments'=>$comments]);
     }
 
     public function create(){
@@ -57,6 +61,12 @@ class ArticleController{
 
     public function delete(int $id){
         $article = Article::getById($id);
+
+        $comments = Comment::findByArticleId($id);
+        foreach ($comments as $comment) { 
+            $comment->delete();
+        }
+
         $article->delete();
         $this->index();
     }
